@@ -46,7 +46,7 @@ def upgrade() -> None:
         sa.Column("tags", ARRAY(sa.String()), nullable=False, server_default="{}"),
         sa.Column("category", sa.String(), nullable=True),
         sa.Column("status", sa.String(), nullable=False, server_default="published"),
-        sa.Column("search_vector", sa.Column(sa.Text()), nullable=True),  # tsvector added by trigger migration
+        sa.Column("search_vector", sa.Text(), nullable=True),  # tsvector added by trigger migration
         sa.Column("created_at", sa.DateTime(), nullable=False),
         sa.Column("updated_at", sa.DateTime(), nullable=False),
     )
