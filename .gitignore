@@ -25,3 +25,9 @@ dist-ssr
 .venv
 
 .env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
