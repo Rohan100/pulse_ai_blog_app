@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation"
 import { Menu, ShieldCheck } from "lucide-react"
 
 import { AuthDialog } from "@/components/auth-dialogs"
+import { HeaderSearch } from "@/components/header-search"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Button, buttonVariants } from "@/components/ui/button"
 import {
@@ -56,6 +57,7 @@ export function Header() {
         </Link>
 
         <div className="hidden items-center gap-3 md:flex">
+          <HeaderSearch />
           <NavLinks />
           <div className="h-6 w-px bg-border" />
           <ThemeToggle />
@@ -93,6 +95,7 @@ export function Header() {
               ))}
             </div>
             <div className="mt-auto grid gap-2 p-4">
+              <HeaderSearch />
               <div className="flex items-center justify-between rounded-lg border p-2">
                 <span className="text-sm font-medium">Theme</span>
                 <ThemeToggle />
