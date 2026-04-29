@@ -3,7 +3,7 @@ from urllib.parse import urlencode
 import httpx
 from fastapi import APIRouter, Depends, HTTPException, Response
 from fastapi.responses import RedirectResponse
-from passlib.hash import bcrypt
+import bcrypt
 from sqlmodel import Session, select
 
 from core.config import settings
@@ -29,7 +29,7 @@ def register(body: UserRegister, db: Session = Depends(get_db)):
     user = User(
         name=body.name,
         email=body.email,
-        password_hash=bcrypt.hash(body.password),
+        password_hash=bcrypt.hashpw(body.password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8'),
         provider="local",
     )
     db.add(user)
@@ -49,7 +49,7 @@ def login(body: UserLogin, response: Response, db: Session = Depends(get_db)):
     user = db.exec(select(User).where(User.email == body.email)).first()
     if not user or not user.password_hash:
         raise HTTPException(status_code=401, detail="Invalid credentials")
-    if not bcrypt.verify(body.password, user.password_hash):
+    if not bcrypt.checkpw(body.password.encode('utf-8'), user.password_hash.encode('utf-8')):
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
     token = create_jwt({"sub": str(user.id), "role": user.role})

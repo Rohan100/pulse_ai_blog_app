@@ -45,7 +45,7 @@ def list_posts(
     category: Optional[str] = None,
     db: Session = Depends(get_db),
 ):
-    query = select(Post).where(Post.status == "published")
+    query = select(Post).where(func.lower(Post.status) == "published")
 
     if tag:
         query = query.where(col(Post.tags).any(tag))
@@ -74,7 +74,7 @@ def search_posts(
     db: Session = Depends(get_db),
 ):
     query = select(Post).where(
-        Post.status == "published",
+        func.lower(Post.status) == "published",
         text("post.search_vector @@ plainto_tsquery('english', :q)")
     ).params(q=q)
     posts = db.exec(query).all()
