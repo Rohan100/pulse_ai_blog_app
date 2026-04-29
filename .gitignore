@@ -1,0 +1,39 @@
+# =========================
+# Python cache and bytecode
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# =========================
+# Virtual environments
+# =========================
+.venv/
+venv/
+env/
+ENV/
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.*
+
+# =========================
+# Frontend (React/Vite)
+# =========================
+node_modules/
+dist/
+.vite/
+
+# =========================
+# IDE/editor files
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
