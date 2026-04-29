@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { getPosts, Post } from "@/lib/api";
+import { newsItems } from "@/lib/news";
 import { ComboboxMultiple } from "@/components/filter-multiselect";
 
 type NewsSearchParams = {
@@ -31,17 +31,9 @@ export default async function NewsPage({
 }) {
   const params = await searchParams;
   const activeCategories = allParams(params.category);
-  
-  // Fetch posts from API, applying category filter if there is exactly one
-  // (Our backend currently supports filtering by one category via query param)
-  // For multiple categories, we can fetch all and filter in memory, or modify backend.
-  // We'll fetch all published posts and filter in memory for simplicity to match existing logic.
-  const data = await getPosts({ limit: 100 });
-  const allPosts = data.posts;
-  
-  const categories = Array.from(new Set(allPosts.map((item) => item.category))).sort();
+  const categories = Array.from(new Set(newsItems.map((item) => item.category))).sort();
 
-  const filteredItems = allPosts.filter((item) => {
+  const filteredItems = newsItems.filter((item) => {
     return activeCategories.length === 0 || activeCategories.includes(item.category);
   });
 
@@ -64,7 +56,7 @@ export default async function NewsPage({
             items={categories}
             selectedItems={activeCategories}
             resultCount={filteredItems.length}
-            totalCount={allPosts.length}
+            totalCount={newsItems.length}
           />
         </div>
 
@@ -77,18 +69,16 @@ export default async function NewsPage({
             <CardHeader>
               <div className="mb-2 flex items-center justify-between gap-3">
                 <Badge variant="outline">{item.category}</Badge>
-                <span className="text-xs text-muted-foreground">
-                  {new Date(item.created_at).toLocaleDateString()}
-                </span>
+                <span className="text-xs text-muted-foreground">{item.date}</span>
               </div>
               <CardTitle>{item.title}</CardTitle>
             </CardHeader>
             <CardContent className="flex-1 text-sm leading-6 text-muted-foreground">
-              {item.summary || item.content.slice(0, 150) + "..."}
+              {item.excerpt}
             </CardContent>
             <CardFooter>
               <Link
-                href={`/news/${item.slug}`}
+                href={`/news/${item.id}`}
                 className="inline-flex items-center gap-1 text-sm font-medium text-primary"
               >
                 Read story
