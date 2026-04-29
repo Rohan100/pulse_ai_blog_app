@@ -17,6 +17,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
+import CreatePostDialog from "./create-post-dialog"
 
 const navItems = [
   { href: "/news", label: "News" },   
@@ -58,6 +59,7 @@ export function Header() {
 
         <div className="hidden items-center gap-3 md:flex">
           <HeaderSearch />
+        <CreatePostDialog />
           <NavLinks />
           <div className="h-6 w-px bg-border" />
           <ThemeToggle />

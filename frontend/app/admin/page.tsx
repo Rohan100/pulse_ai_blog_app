@@ -73,7 +73,6 @@ export default function AdminPage() {
                 <TableHead>Title</TableHead>
                 <TableHead>Category</TableHead>
                 <TableHead>Author</TableHead>
-                <TableHead>Status</TableHead>
                 <TableHead className="text-right">Date</TableHead>
               </TableRow>
             </TableHeader>
@@ -87,11 +86,6 @@ export default function AdminPage() {
                   </TableCell>
                   <TableCell>{item.category}</TableCell>
                   <TableCell>{item.author}</TableCell>
-                  <TableCell>
-                    <Badge variant={item.status === "Published" ? "default" : "outline"}>
-                      {item.status}
-                    </Badge>
-                  </TableCell>
                   <TableCell className="text-right">{item.date}</TableCell>
                 </TableRow>
               ))}
