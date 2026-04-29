@@ -19,8 +19,9 @@ import {
 import { cn } from "@/lib/utils"
 
 const navItems = [
-  { href: "/news", label: "News" },   
+  { href: "/news", label: "News" },
   { href: "/admin", label: "Admin" },
+  { href: "/json-visualizer", label: "JSON Visualizer" },
 ]
 
 function NavLinks({ className }: { className?: string }) {
