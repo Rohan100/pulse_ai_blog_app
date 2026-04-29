@@ -23,6 +23,7 @@ const navItems = [
   { href: "/news", label: "News" },
   { href: "/admin", label: "Admin" },
   { href: "/json-visualizer", label: "JSON Visualizer" },
+  { href: "/timeline", label: "News Timeline" },
 ]
 
 function NavLinks({ className }: { className?: string }) {
@@ -60,7 +61,7 @@ export function Header() {
 
         <div className="hidden items-center gap-3 md:flex">
           <HeaderSearch />
-        <CreatePostDialog />
+          <CreatePostDialog />
           <NavLinks />
           <div className="h-6 w-px bg-border" />
           <ThemeToggle />
